@@ -7,7 +7,9 @@ SRCS_PATH = ./srcs/
 
 SRCS = $(SRCS_PATH)main.c \
 	$(SRCS_PATH)utils.c \
-	$(SRCS_PATH)lexer.c
+	$(SRCS_PATH)lexer.c \
+	$(SRCS_PATH)check_direction.c \
+	$(SRCS_PATH)free.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -35,3 +37,6 @@ fclean: clean
 	@echo bye $(NAME)
 
 re: fclean all
+
+r: $(NAME)
+	valgrind --leak-check=full --track-origins=yes ./cub3D ./map/ok.cub

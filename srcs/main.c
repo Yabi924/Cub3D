@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 20:33:30 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/01 21:48:55 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/02 01:40:38 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,16 @@ int is_cub_file(char *file_name)
 {
     int i;
 
-    i = 0;
-    while (file_name[i] && file_name[i] != '.')
-        i++;
-    if (file_name[i] != '.')
+    if (!file_name)
         return (1);
-    if (file_name[i + 1] == 'c' && file_name[i + 2] == 'u' && \
-        file_name[i + 3] == 'b' && !file_name[i + 4])
+    i = ft_strlen(file_name);
+    if (file_name[i - 4] == '.' && file_name[i - 3] == 'c' && \
+        file_name[i - 2] == 'u' && file_name[i - 1] == 'b')
         return (0);
     return (1);
 }
 
-void check_invalid(t_cub *cub)
+int check_invalid(t_cub *cub)
 {
     int fd;
     char    *temp;
@@ -62,7 +60,7 @@ void check_invalid(t_cub *cub)
         err("Error: fatal", 1);
     if (readd)
         free(readd);
-    lexer(cub);
+    return (lexer(cub));
 }
 
 int main(int argc, char **argv)
@@ -72,7 +70,13 @@ int main(int argc, char **argv)
     if (argc != 2)
         err("Invaild input! Please follow ./cub3D <map_path>", 1);
     init_cub(&cub, argv);
-    check_invalid(&cub);
+    if (check_invalid(&cub))
+    {
+        free_data(&cub);
+        err("Invaild Map!", 1);
+    }
+    printf("good\n");
+    free_data(&cub);
     return (0);
 }
 

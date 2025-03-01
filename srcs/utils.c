@@ -7,19 +7,6 @@ void    err(char *message, int q)
         exit(1);
 }
 
-void    free_arr(char **arr)
-{
-    int i;
-
-    i = -1;
-    if (!arr || !arr[0])
-        return ;
-    while (arr[++i])
-        free(arr[i]);
-    if (arr)
-        free(arr);
-}
-
 int ft_arrlen(char **arr)
 {
     int i;
@@ -28,6 +15,31 @@ int ft_arrlen(char **arr)
     while (arr[i])
         i++;
     return (i);
+}
+
+char    **ft_arrdup_n(char **arr, int n)
+{
+    int i;
+    char    **new;
+
+    i = 0;
+    if (!arr || !arr[0])
+        return (NULL);
+    new = malloc((n + 1) * sizeof(char *));
+    if (!new)
+        return (NULL);
+    while (arr[i] && i < n)
+    {
+        new[i] = ft_strdup(arr[i]);
+        if (!new[i])
+        {
+            free_arr(new);
+            return (NULL);
+        }
+        i++;
+    }
+    new[i] = NULL;
+    return (new);
 }
 
 char    **ft_arrdup(char **arr)
