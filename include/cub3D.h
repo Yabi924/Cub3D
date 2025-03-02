@@ -1,6 +1,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 # include "../libft/libft.h"
 # include <math.h>
 # include <fcntl.h>
@@ -8,6 +10,10 @@
 
 typedef struct s_mlx
 {
+    char    *n_path;
+    char    *w_path;
+    char    *s_path;
+    char    *e_path;
 
 }   t_mlx;
 
@@ -34,6 +40,11 @@ typedef struct s_cub
     t_dir   dir;
 }   t_cub;
 
+//init.c
+void    init_cub(t_cub *cub, char **argv);
+int     init_mlx(t_mlx *mlx, t_dir *dir);
+int     init_dir(t_dir *dir, char **infile);
+
 //utils.c
 char    **ft_arrdup(char **arr);
 char    **ft_arrdup_n(char **arr, int n);
@@ -47,6 +58,7 @@ void    free_arr(char **arr);
 
 //check_dir.c
 int check_direction(t_dir *dir);
+int check_direction_path(t_dir *dir, t_cub *cub);
 
 //lexer.c
 int lexer(t_cub *cub);

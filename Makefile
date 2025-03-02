@@ -1,7 +1,7 @@
 CFLAG = -Wall -Wextra -Werror
 NAME = cub3D
 
-LIBS = ./libft/libft.a -L./libft -lft
+LIBS = ./libft/libft.a -L./libft -lft -L./minilibx-linux/ -lmlx -lmlx_Linux -lX11 -lXext -lm
 
 SRCS_PATH = ./srcs/
 
@@ -37,6 +37,12 @@ fclean: clean
 	@echo bye $(NAME)
 
 re: fclean all
+
+mlx:
+	@make -C ./minilibx-linux/ --no-print-directory
+
+cmlx:
+	@make clean -C ./minilibx-linux/ --no-print-directory
 
 r: $(NAME)
 	valgrind --leak-check=full --track-origins=yes ./cub3D ./map/ok.cub

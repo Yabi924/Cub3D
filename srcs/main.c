@@ -6,21 +6,11 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 20:33:30 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/02 01:40:38 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:54:18 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
-
-void    init_cub(t_cub *cub, char **argv)
-{
-    cub->path = ft_strdup(argv[1]);
-    cub->infile = NULL;
-    cub->n_path = NULL;
-    cub->s_path = NULL;
-    cub->w_path = NULL;
-    cub->e_path = NULL;
-}
 
 int is_cub_file(char *file_name)
 {
